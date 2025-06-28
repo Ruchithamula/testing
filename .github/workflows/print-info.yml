@@ -1,0 +1,23 @@
+name: Print Collaborator and Project Name
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  print-info:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Print project (repository) name
+        run: echo "Project Name: ${{ github.repository }}"
+
+      - name: Authenticate GitHub CLI
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
+
+      - name: List collaborators
+        run: gh api repos/${{ github.repository }}/collaborators --paginate --jq '.[] | .login'
