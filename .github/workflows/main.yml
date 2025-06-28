@@ -1,0 +1,20 @@
+name: Print Collaborator and Project Info
+
+on:
+  workflow_dispatch:  # Trigger manually from GitHub UI
+
+jobs:
+  print-info:
+    runs-on: ubuntu-latest  # Use the latest Ubuntu runner for the job
+
+    env:
+      COLLABORATOR_NAME: "PULIASHWINI"  # You can change this to a dynamic value or pass it as a secret
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4  # Checks out the code in the repository
+
+      - name: Print Collaborator and Project Name
+        run: |
+          echo "Collaborator Name: $PULIASHWINI"
+          echo "Project Name: ${{ github.ACTIONS }}"
